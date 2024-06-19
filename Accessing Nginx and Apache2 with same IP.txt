@@ -1,0 +1,34 @@
+sudo apt update
+
+#Install Nginx
+sudo apt install nginx -y
+
+#Check with Public Ip:80
+
+#Now install Apache2
+sudo apt install apache2 -y
+
+#Now Configure the port to listen to 8080
+sudo nano /etc/apache2/ports.conf
+Change listen 8080
+
+cd /etc/apache2/sites-available/
+sudo nano 000-default.conf 
+
+#Change VirtualHost from 80 to 8080 and  DocumentRoot to  /var/www/html/apache2
+
+<VirtualHost *:8080>
+   DocumentRoot /var/www/html/apache2
+
+
+    ...
+</VirtualHost>
+
+#Make New folder as index.html and index.nginx-debian.html exist on same path (/var/www/html/) so by default it will take only index.html
+Go to /var/www/html/   
+mkdir apache2
+and move index.html to apache2
+
+sudo systemctl restart apache2
+sudo systemctl restart nginx
+Now copy Public IP and access it to port 8080 for apache and 80 for nginx 
