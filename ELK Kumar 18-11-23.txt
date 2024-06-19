@@ -1,0 +1,55 @@
+K8s----Using Helm---------Monitor
+
+HELM:
+yum/apt: Package Manager__Issue faced: that some package is missing
+
+Lets supoose:
+Need to install S/W in K8s: 
+Requirements:
+1.Deployment.YAML
+2.ConfigMap.YAML
+3.Secret.YAML
+4.Service.YAML
+
+HELM is package(collection of yaml----->helm chart) manger for K8S (where instead of writing many yaml files we can use helm)
+Why popular: Sharing helm chart>K8s Kafka on K8s>Helm chart out of it>Share with community
+1.Install HELM
+2.HELM search<>
+3.Helm install<chart name>
+
+Till helm 2: HELM Client-->File-->HELM Server//Teller(lets suppose we have app version1.2 now new version 2.2 is there teller keep the 1.2 as well that makes security issue as it has acces of 1.2 as well.
+HELM 3: there is no teller----simple helm binary(there is no master worker architecture)
+
+Statefulsets (We dont create deployment for DB):---->Databases:
+Like DB: amazon.com--->READ Request----->READ Replica--->(Created from Master DB) Not in MASTER DB
+so Once MASTER is created then READY DB is created then other: it follow sequence
+
+
+Stateless Application:(Deployment is required)
+ex: Deployment--> --replica--3--> Create 3 pods and same point of time all the pods get launched
+Whenever new pods will come its name will be different
+
+Deamonsets:when we want to run one pod on each worker nodes.kind: Deamonsets
+FLUENTD :Any data source-Access log,System Log,DB takes it process the data into a unified format ---put it in any destination(also enrich the logs as well)
+
+How fluentd works:
+Fluentd is rich in plugins and its not tied with any particular backend.
+
+
+EFK :
+K8s-->Fluentd(Deamon Set)--->Elastic Search(Statefulsets)--->Kibana(Deployment)
+1.We are going to launch K8s Cluster(AKS/LKE)
+2. We are going to deploy 2 microservices:1. in java 2 in NodeJS
+
+(this will generate log in different format)
+
+3.Launch Elastic Search(through helm chart)
+4.Will install fluentd
+5.Launch Kibana
+
+Lab:
+K8s Cluster: having 3 Nodes (all are running different pods)--->Every Nodes are generating logs and Fluentd is collecting logs. Now we have ES that have Persistent Volume it has master that stores inside PV and Fluentd is also trasferring data to Elastic Search. then will launch kibana(tool for visualisation) will talk to master.
+ 
+
+
+
